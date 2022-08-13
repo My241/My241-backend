@@ -6,13 +6,25 @@ import (
 )
 
 type Business struct {
-    Name string `json:"business_name"`
-	Number int  `json:"pk"`
+    name string        `json:"business_name"`
+	primaryKey uint64  `json:"pk"`
+
+    events map[string]*Event
 }
 
+type Event struct {
+    name string               `json:"business_name"`
+	primaryKey uint64         `json:"pk"`
+    foreignKeyBusiness uint64 `json:"fk"`
+}
+
+
 func main() {
-    emp := &Employee{Name: "Rocky",Number: 5454}
-    e, err := json.Marshal(emp)
+    business1 := &Business{name: "Todo o nada", primaryKey: 0}
+    //event1 := &Event{name: "2 x 1", primaryKey: 1000, foreignKeyBusiness: 0}
+    //event2 := &Event{name: "Birra gratis", primaryKey: 1001, foreignKeyBusiness: 0}
+
+    e, err := json.Marshal(business1)
     if err != nil {
         fmt.Println(err)
         return
